@@ -1,0 +1,857 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "Raela Grotesque";
+  src: url("/public/fonts/RaelaGrotesque-Light.ttf") format("truetype");
+  font-weight: 300;
+}
+@font-face {
+  font-family: "Raela Grotesque";
+  src: url("/public/fonts/RaelaGrotesque-Regular.ttf") format("truetype");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Raela Grotesque";
+  src: url("/public/fonts/RaelaGrotesque-Medium.ttf") format("truetype"); /* Corrigé l'URL ici */
+  font-weight: 500;
+}
+@font-face {
+  font-family: "Raela Grotesque";
+  src: url("/public/fonts/RaelaGrotesque-ExtraBold.ttf") format("truetype");
+  font-weight: 900;
+}
+
+:root {
+  --primary: #1f1e1e;
+  --secondary: #928c80;
+
+  /* Font settings */
+  --font-main: "Raela Grotesque", sans-serif; 
+  --font-light: 300;
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-bold: 900;
+
+  /* Spaces */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 64px;
+
+  /* Font Sizes */
+  --size-xs: 12px;
+  --size-sm: 14px;
+  --size-md: 16px;
+  --size-lg: 24px;
+  --size-xl: 40px;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: #fafafa;
+  color: var(--primary);
+  overflow-x: hidden;
+} 
+
+/* --- NAVIGATION --- */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 1000;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.nav-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  text-align: left;
+}
+
+.logo #head {
+  font-size: var(--size-lg);
+  font-weight: var(--font-bold);
+  line-height: 1;
+}
+
+.logo #sub-head {
+  font-size: 10px;
+  font-weight: var(--font-medium);
+  letter-spacing: 4px;
+}
+
+/* Navigation Links (Default: Mobile Drawer) */
+.nav-links {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 80%;
+  max-width: 320px;
+  height: 100vh;
+  background-color: white;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-lg);
+  gap: var(--space-lg);
+  transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+  list-style: none;
+}
+
+.nav-links.active {
+  right: 0;
+}
+
+.mobile-only-header {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+#close-btn {
+  font-size: 32px;
+  cursor: pointer;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: var(--primary);
+  font-size: 20px;
+  font-weight: var(--font-medium);
+  display: block;
+}
+
+#burger-btn {
+  font-size: 28px;
+  cursor: pointer;
+  display: block;
+}
+
+#contact-desktop {
+  display: none; /* Masqué sur mobile */
+}
+
+/* Overlay pour le menu mobile */
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 999;
+}
+
+#overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* --- SECTION HERO (ABOUT) --- */
+#about {
+  padding: 120px var(--space-md) var(--space-xl);
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  min-height: 100vh; /* Permet au bloc de grandir si le contenu dépasse */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-lg);
+  color: white;
+}
+
+#about #question {
+  font-size: 64px;
+  font-weight: var(--font-bold);
+  line-height: 0.9;
+}
+
+#description {
+  width: 100%;
+  text-align: left;
+}
+
+#description h2 {
+  font-size: var(--size-xl);
+  font-weight: var(--font-light);
+  line-height: 1.2;
+  margin-bottom: var(--space-lg);
+}
+
+#description p {
+  font-size: var(--size-md);
+  opacity: 0.8;
+}
+
+/* --- SECTION DETAILS (SERVICES) --- */
+#details {
+  padding: var(--space-xl) var(--space-md);
+  min-height: auto;
+}
+
+#details .content {
+  display: grid;
+  grid-template-columns: 1fr; /* 1 seule colonne sur mobile */
+  gap: var(--space-lg);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.detail {
+  padding: var(--space-md);
+  border-left: 2px solid var(--secondary);
+}
+
+.detail h3 {
+  font-size: 20px;
+  margin-bottom: var(--space-sm);
+}
+
+.left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-row: 1; /* Met la photo en haut sur mobile */
+}
+
+.left img {
+  width: 100%;
+  max-width: 200px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* --- CERTIFICATIONS --- */
+#certification {
+  background: var(--secondary);
+  color: white;
+  padding: var(--space-xl) var(--space-md);
+}
+
+#certification h1 {
+  text-align: center;
+  font-size: var(--size-lg);
+  margin-bottom: var(--space-xl);
+}
+
+#degree {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* S'adapte au nombre d'éléments */
+  gap: var(--space-lg);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.degree {
+  text-align: center;
+}
+
+.degree img {
+  width: 80px;
+  height: 80px;
+  margin-bottom: var(--space-sm);
+  filter: brightness(0) invert(1); /* Rend tes icônes blanches sur fond marron */
+}
+
+.degree h3 {
+  font-size: var(--size-sm);
+  font-weight: var(--font-regular);
+}
+
+
+/* ==========================================================================
+   MEDIA QUERIES (DESKTOP & TABLETS >= 768px)
+   ========================================================================== */
+@media (min-width: 768px) {
+  :root {
+    --size-lg: 32px;
+    --size-xl: 64px;
+  }
+
+  /* Nav Desktop */
+  nav {
+    height: 100px;
+  }
+
+  .nav-container {
+    padding: 0 var(--space-xl);
+  }
+
+  #burger-btn, .mobile-only-header, .mobile-only-contact {
+    display: none !important;
+  }
+
+  .nav-links {
+    position: static;
+    height: auto;
+    width: auto;
+    max-width: none;
+    flex-direction: row;
+    background: transparent;
+    box-shadow: none;
+    border: 1px solid var(--primary);
+    border-radius: 50px;
+    padding: var(--space-sm) var(--space-md);
+    gap: 0;
+  }
+
+  .nav-links li a {
+    font-size: var(--size-sm);
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: 25px;
+    transition: background 0.3s;
+  }
+
+  .nav-links li a:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  #contact-desktop {
+    display: block;
+    border: 1px solid var(--primary);
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: var(--font-medium);
+    transition: all 0.3s ease;
+  }
+
+  #contact-desktop:hover {
+    background-color: var(--primary);
+    color: white;
+  }
+
+  /* Hero Desktop */
+  #about {
+    flex-direction: row;
+    align-items: center;
+    padding: 100px var(--space-xl);
+  }
+
+  #about #question {
+    font-size: 15vw; /* Taille fluide selon l'écran */
+    width: 45%;
+  }
+
+  #description {
+    width: 50%;
+  }
+
+  /* Grid details desktop */
+  #details .content {
+    grid-template-columns: 1fr 280px 1fr;
+    grid-template-rows: repeat(4, auto);
+    grid-template-areas: 
+      "top    .     ."
+      ".      left  right1"
+      ".      left  right2"
+      "bottom .     .";
+    gap: var(--space-md);
+  }
+
+  .top { grid-area: top; text-align: right; border-left: none; border-right: 2px solid var(--secondary); }
+  .bottom { grid-area: bottom; text-align: right; border-left: none; border-right: 2px solid var(--secondary); }
+  .right1 { grid-area: right1; }
+  .right2 { grid-area: right2; }
+  .left { grid-area: left; grid-row: auto; }
+  
+  .left img {
+    max-width: 250px;
+  }
+
+  /* Certifs Desktop */
+  #degree {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+/* ==========================================================================
+   SECTION PROJETS / RÉALISATIONS
+   ========================================================================== */
+.projects-section {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 100px var(--space-md) var(--space-xl);
+  z-index: 1;
+}
+
+/* Couches de fond pour les transitions de couleurs fluides */
+.bg-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  transition: opacity 0.8s ease-in-out;
+}
+
+.bg-primary-fade {
+  background-color: var(--primary);
+  opacity: 1;
+}
+
+.bg-secondary-fade {
+  background-color: var(--secondary);
+  opacity: 0;
+}
+
+/* Layout Container */
+.projects-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  gap: var(--space-xl);
+  z-index: 2;
+}
+
+/* Panneau d'informations de gauche (Effet Verre Flouté / Frosted Glass) */
+.project-info-panel {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: var(--space-lg);
+  color: white;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-md);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+.section-subtitle {
+  font-size: var(--size-sm);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  opacity: 0.6;
+}
+
+.info-content {
+  min-height: 150px;
+}
+
+.info-content h3 {
+  font-size: var(--size-lg);
+  font-weight: var(--font-bold);
+  margin-bottom: var(--space-md);
+}
+
+.info-content p {
+  font-size: var(--size-md);
+  line-height: 1.6;
+  opacity: 0.8;
+}
+
+/* Animation de transition de texte */
+.fade-text {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.fade-text.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Boutons de contrôle */
+.carousel-controls {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.control-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.control-btn:hover {
+  background: white;
+  color: var(--primary);
+  transform: scale(1.05);
+}
+
+/* Partie droite : Gestion du carrousel */
+.carousel-wrapper {
+  overflow: visible; /* Laisse dépasser les cartes suivantes pour l'effet de profondeur */
+  width: 100%;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 24px;
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  padding: 10px 0;
+}
+
+/* Cartes individuelles */
+.project-card {
+  flex: 0 0 280px; /* Largeur fixe de la carte */
+  height: 380px;
+  cursor: pointer;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  opacity: 0.5; /* Les cartes inactives sont plus transparentes */
+  transform: scale(0.95);
+}
+
+.project-card.active {
+  opacity: 1;
+  transform: scale(1.03); /* Met la carte active en valeur */
+}
+
+.card-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  padding: var(--space-lg);
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+  color: white;
+}
+
+.card-number {
+  font-size: var(--size-sm);
+  font-weight: var(--font-bold);
+  opacity: 0.5;
+}
+
+.card-inner h4 {
+  font-size: 22px;
+  font-weight: var(--font-bold);
+}
+
+
+/* ==========================================================================
+   MEDIA QUERIES (DESKTOP >= 768px)
+   ========================================================================== */
+@media (min-width: 768px) {
+  .projects-section {
+    padding: 120px var(--space-xl);
+  }
+
+  .projects-container {
+    flex-direction: row; /* Aligné horizontalement sur grand écran */
+    align-items: center;
+    gap: var(--space-xl);
+  }
+
+  .project-info-panel {
+    width: 40%;
+    min-width: 380px;
+    height: 480px;
+    padding: var(--space-xl);
+  }
+
+  .carousel-wrapper {
+    width: 60%;
+    /* Empêche de scroller horizontalement la page entière tout en voyant les cartes suivantes */
+    overflow: hidden; 
+    padding-left: 20px;
+  }
+
+  .project-card {
+    flex: 0 0 320px;
+    height: 440px;
+  }
+}
+/* ==========================================================================
+   SECTION CONTACT & FOOTER
+   ========================================================================== */
+.contact-section {
+  background-color: var(--primary);
+  color: white;
+  padding: 100px var(--space-md) 40px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: space-between;
+}
+
+.contact-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr; /* Stacked sur mobile */
+  gap: var(--space-xl);
+  align-items: start;
+}
+
+.contact-form-container h2 {
+  font-size: var(--size-xl);
+  font-weight: var(--font-bold);
+  margin-bottom: var(--space-xs);
+}
+
+.contact-subtitle {
+  font-size: var(--size-md);
+  opacity: 0.6;
+  margin-bottom: var(--space-xl);
+}
+
+/* Formulaire moderne avec Labels Flottants */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.form-group {
+  position: relative;
+  width: 100%;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: var(--space-md) 0;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: var(--size-md);
+  font-family: var(--font-main);
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.form-group textarea {
+  resize: none;
+}
+
+/* Label Flottant magique en CSS pur */
+.form-group label {
+  position: absolute;
+  top: var(--space-md);
+  left: 0;
+  color: rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+  transition: all 0.3s ease;
+  font-size: var(--size-md);
+}
+
+/* Quand l'input est focus OU non vide (via placeholder hack) */
+.form-group input:focus ~ label,
+.form-group input:not(:placeholder-shown) ~ label,
+.form-group textarea:focus ~ label,
+.form-group textarea:not(:placeholder-shown) ~ label {
+  top: -12px;
+  font-size: var(--size-xs);
+  color: var(--secondary);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-bottom-color: var(--secondary);
+}
+
+/* Bouton d'envoi */
+.submit-btn {
+  align-self: flex-start;
+  background-color: white;
+  color: var(--primary);
+  border: none;
+  padding: var(--space-md) var(--space-xl);
+  border-radius: 50px;
+  font-size: var(--size-md);
+  font-weight: var(--font-medium);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: var(--secondary);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.btn-icon {
+  transition: transform 0.3s ease;
+}
+
+.submit-btn:hover .btn-icon {
+  transform: translateX(4px);
+}
+
+/* Carte d'informations / Réseaux Sociaux */
+.contact-info-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: var(--space-xl) var(--space-lg);
+  border-radius: 24px;
+}
+
+.info-header h3 {
+  font-size: var(--size-lg);
+  font-weight: var(--font-bold);
+  margin-bottom: var(--space-xs);
+}
+
+.info-header p {
+  opacity: 0.6;
+  font-size: var(--size-sm);
+  margin-bottom: var(--space-xl);
+}
+
+/* Liste des réseaux sociaux interactifs */
+/* Le conteneur de tes réseaux sociaux */
+.social-links-container {
+  display: flex;
+  justify-content: center; /* Aligne les icônes au centre (ou flex-start pour la gauche) */
+  align-items: center;
+  gap: var(--space-md); /* Espace fluide entre chaque bouton (ex: 16px) */
+  margin-top: var(--space-md);
+}
+
+/* Le bouton/lien qui entoure le SVG */
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;  /* Taille du bouton tactile sur mobile */
+  height: 48px; /* Standard d'accessibilité pour faciliter le clic au doigt (minimum 44px) */
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* L'icône SVG à l'intérieur */
+.social-link .social-icon {
+  /* Étape clé : On force le SVG à occuper un pourcentage de son conteneur parent */
+  width: 24px;  /* Taille idéale de l'icône sur mobile */
+  height: 24px;
+  object-fit: contain; /* Garantit que le SVG garde ses proportions sans distorsion */
+  transition: transform 0.3s ease;
+  
+  /* Astuce si tes SVG d'icônes sont noirs par défaut et que tu les veux en blanc : */
+  filter: brightness(0) invert(1); 
+}
+
+/* --- Effets au survol (Desktop) --- */
+.social-link:hover {
+  background: white;
+  border-color: white;
+  transform: translateY(-3px); /* Petit effet de lévitation */
+}
+
+.social-link:hover .social-icon {
+  /* On applique un filtre noir pour que l'icône reste visible quand le fond du bouton devient blanc */
+  filter: brightness(0) saturate(100%) invert(10%) sepia(5%) saturate(10%) hue-rotate(320deg) brightness(95%) contrast(90%);
+}
+
+/* ==========================================================================
+   Adaptation pour les écrans plus grands (Tablettes & Desktop >= 768px)
+   ========================================================================== */
+@media (min-width: 768px) {
+  .social-link {
+    width: 56px;  /* On agrandit légèrement le bouton sur ordinateur */
+    height: 56px;
+  }
+
+  .social-link .social-icon {
+    width: 28px;  /* On agrandit l'icône SVG proportionnellement */
+    height: 28px;
+  }
+}
+
+.direct-mail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.direct-mail span {
+  font-size: var(--size-xs);
+  opacity: 0.5;
+}
+
+.direct-mail a {
+  color: var(--secondary);
+  text-decoration: none;
+  font-weight: var(--font-medium);
+  font-size: var(--size-md);
+  transition: color 0.3s;
+}
+
+.direct-mail a:hover {
+  color: white;
+}
+
+/* --- FOOTER & COPYRIGHT --- */
+.portfolio-footer {
+  margin-top: 80px;
+  padding-top: var(--space-lg);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+.portfolio-footer p {
+  font-size: var(--size-xs);
+  opacity: 0.5;
+}
+
+
+/* ==========================================================================
+   MEDIA QUERIES DESKTOP
+   ========================================================================== */
+@media (min-width: 768px) {
+  .contact-container {
+    grid-template-columns: 1.2fr 0.8fr; /* Formulaire à gauche, Carte info à droite */
+    gap: var(--space-xl);
+  }
+
+  .contact-section {
+    padding: 140px var(--space-xl) 40px;
+  }
+}
