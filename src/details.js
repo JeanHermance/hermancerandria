@@ -7,7 +7,7 @@ export function Details(){
                 <p>I design clean, modern, and user-centered interfaces that improve usability, increase engagement, and turn ideas into memorable experiences.</p>
             </div>
             <div class=" left">
-                <img src="public/Frame 2.jpg" alt="profile">
+                <img src="Frame 2.jpg" alt="profile">
             </div>
             <div class="detail right1">
                 <h3>Web Development</h3>

@@ -40,13 +40,13 @@ export function Contact() {
                 <!-- Liens vers tes réseaux sociaux -->
                 <div class="social-links-container">
                     <a href="https://wa.me/YOUR_PHONE_NUMBER" target="_blank" rel="noopener noreferrer" class="social-link" data-platform="whatsapp">
-                        <img class="social-icon" src="public/icon/whatsapp.svg"/>
+                        <img class="social-icon" src="/icon/whatsapp.svg"/>
                     </a>
                     <a href="https://linkedin.com/in/YOUR_PROFILE" target="_blank" rel="noopener noreferrer" class="social-link" data-platform="linkedin">
-                        <img class="social-icon" src="public/icon/linkedin.svg"/>
+                        <img class="social-icon" src="/icon/linkedin.svg"/>
                     </a>
                     <a href="https://github.com/YOUR_USERNAME" target="_blank" rel="noopener noreferrer" class="social-link" data-platform="github">
-                        <img class="social-icon" src="public/icon/github.svg"/>
+                        <img class="social-icon" src="/icon/github.svg"/>
                     </a>
                 </div>
 
